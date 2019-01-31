@@ -2,6 +2,7 @@
 #include "SplashState.hpp"
 #include <stdlib.h>
 #include <time.h>
+#include "DEFINITIONS.hpp"
 
 namespace Alex
 {
@@ -9,8 +10,9 @@ namespace Alex
 	{
 		srand(time(NULL));
 
+		//_data->window.create(sf::VideoMode::getFullscreenModes()[0], title, sf::Style::Fullscreen);
 		_data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-		
+		_data->window.setIcon(sfml_icon.width, sfml_icon.height, sfml_icon.pixel_data);
 		//If you comment this, you will have very smooth game but also very consuming
 		_data->window.setFramerateLimit(60);
 		//_data->window.setVerticalSyncEnabled(false);
