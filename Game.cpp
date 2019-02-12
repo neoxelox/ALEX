@@ -2,21 +2,23 @@
 #include "SplashState.hpp"
 #include <stdlib.h>
 #include <time.h>
-#include "DEFINITIONS.hpp"
 
 namespace Alex
 {
 	Game::Game(int width, int height, std::string title)
 	{
 		srand(time(NULL));
+		
+		if(FULLSCREEN) _data->window.create(sf::VideoMode::getFullscreenModes()[0], title, sf::Style::Fullscreen);
+		else _data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
 
-		//_data->window.create(sf::VideoMode::getFullscreenModes()[0], title, sf::Style::Fullscreen);
-		_data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
 		_data->window.setIcon(sfml_icon.width, sfml_icon.height, sfml_icon.pixel_data);
 		//If you comment this, you will have very smooth game but also very consuming
-		_data->window.setFramerateLimit(60);
+		_data->window.setFramerateLimit(FRAME_LIMIT);
 		//_data->window.setVerticalSyncEnabled(false);
 
+		_data->window.setMouseCursorVisible(MOUSE_VISIBLE);
+		
 		_data->machine.AddState(StateRef(new SplashState(this->_data)));
 
 		this->Run();

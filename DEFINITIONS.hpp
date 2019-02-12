@@ -1,8 +1,11 @@
 #pragma once
 
 //-->***********[WINDOWS]***********<--
-#define SCREEN_WIDTH 720
-#define SCREEN_HEIGHT 1000
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+#define FULLSCREEN true
+#define MOUSE_VISIBLE false
+#define FRAME_LIMIT 60
 //<----------------------------------->
 
 //-->********[SPLASH SCREEN]********<--

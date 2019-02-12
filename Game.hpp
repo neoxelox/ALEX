@@ -8,6 +8,7 @@
 #include "StateMachine.hpp"
 #include "AssetManager.hpp"
 #include "InputManager.hpp"
+#include "DEFINITIONS.hpp"
 
 namespace Alex
 {
@@ -26,7 +27,7 @@ namespace Alex
 	public:
 		Game(int width, int height, std::string title);
 	private:
-		const float dt = 1.0f / 60.0f;
+		const float dt = 1.0f / (1.0f * FRAME_LIMIT);
 		sf::Clock _clock;
 
 		GameDataRef _data = std::make_shared<GameData>();

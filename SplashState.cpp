@@ -33,18 +33,28 @@ namespace Alex {
 
 	void SplashState::HandleInput()
 	{
+		//-->*********[MOUSE-FAST]********<--
+		//<--------------------------------->
+
+		//-->*******[KEYBOARD-FAST]*******<--
+		//<--------------------------------->
+		
 		sf::Event event;
 		while (this->_data->window.pollEvent(event)) 
 		{
+			switch (event.type)
+			{
 			//-->**********[WINDOWS]**********<--
-			if (sf::Event::Closed == event.type) this->_data->window.close();
+			case sf::Event::Closed: this->_data->window.close(); break;
 			//<--------------------------------->
+			default: break;
+			}
 
 			//-->***********[MOUSE]***********<--
 			//<--------------------------------->
 
 			//-->*********[KEYBOARD]**********<--
-			//<--------------------------------->
+			//<--------------------------------->			
 		}
 	}
 
