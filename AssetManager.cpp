@@ -46,80 +46,58 @@ namespace Alex
 	sf::SoundBuffer &AssetManager::GetAudio(std::string name) {
 		return this->_audios.at(name);
 	}
-	//DONT USE WORK IN PROGRESS
-	bool AssetManager::LoadConfig(std::string fileName) {
-		std::string name, config; char h; int startLine = _cfgLines.size() - 1, line = 0;
-		readFile.open(fileName);
 	
+	bool AssetManager::LoadConfig(std::string fileName) {
+		std::string name, config, line; int startIndex = _cfgLines.size();
+
+		readFile.open(fileName);
 		if (readFile.is_open()) {
-			while (!readFile.eof()) {
-				readFile >> std::noskipws >> h;
-				//TODO:CORREGIR ACCENTOS Y COMENTARIOS
-				switch (h)
-				{
-				case ':':
-					name = config;
-					config = "";
-					break;
-				case ',':
-					_configs.insert(std::make_pair(name, config));
-					_cfgLines.push_back("cfginliner");
-					_cfgLines.push_back(config);
-					line += 2;
-					std::cout << "[CONFIGS]    Size: " << _configs.size() << " | Cargado en memoria: " << name << " = " << config << std::endl;
-					name = "";
-					config = "";
-					break;
-				case ';':
-					_cfgLines.push_back(config + ";\n");
-					line++;
-					name = "";
-					config = "";
-					break;
-				case '\n':
-					break;
-				default:
-					config += h;
-					break;
+			while (std::getline(readFile, line)) {
+				std::stringstream ss(line);
+				while (ss >> config) {
+					if (config == "#") { _cfgLines.push_back(line); break; }
+					else {
+						name = config;
+						ss >> config >> config;
+						_configs.insert(std::make_pair(name, config));
+						_cfgLines.push_back(line);
+						break;
+					}
 				}
 			}
-			line += startLine;
-			_configs.insert(std::make_pair(fileName, std::to_string(startLine) + "/" + std::to_string(line)));
+			_configs.insert(std::make_pair(fileName, std::to_string(startIndex) + " " +  std::to_string(_cfgLines.size()-1)));
+			std::cout << "[CONFIGS]   File name: " << fileName << " | Cargado en memoria: " << _cfgLines.size() - startIndex << " configuraciones" << std::endl;
 		}
 		else return false;
 
 		readFile.close();
+
 		return true;
 	}
-	//DONT USE WORK IN PROGRESS
+	
 	const std::string &AssetManager::GetConfig(std::string name) {
 		return this->_configs.at(name);
 	}
-	//DONT USE WORK IN PROGRESS
+	
 	void AssetManager::SaveConfig(std::string name, std::string value) {
-		this->_configs.insert(std::make_pair(name, value));
+		this->_configs[name] = value;
 	}
-	//DONT USE WORK IN PROGRESS
+	
 	bool AssetManager::SaveConfig(std::string fileName) {
-		std::string temp, sIndex, eIndex; char h; int startIndex; int endIndex;
-		temp = _configs.at(fileName);
-		std::getline(std::cin, sIndex, '/');
-		std::getline(std::cin, eIndex);
-		startIndex = atoi(sIndex.c_str());
-		endIndex = atoi(eIndex.c_str());
-
+		std::string temp, line; int startIndex = 0; int endIndex = 0;
+		if (not this->_configs.count(fileName)) return false;
+		temp = this->_configs.at(fileName);
+		std::stringstream ss(temp);
+		ss >> startIndex >> endIndex;
+		
 		writeFile.open(fileName);
-
 		if (writeFile.is_open())
 		{
-			for (int i = startIndex; i <= endIndex; i++) 
-			{
-				if (_cfgLines[i] == "cfginliner")
-				{
-					i++;
-					writeFile << _cfgLines[i] + ":" + _configs.at(_cfgLines[i]) + "\n";
-				}
-				else writeFile << _cfgLines[i];
+			for (int i = startIndex; i <= endIndex; i++) {
+				std::stringstream ss(_cfgLines[i]);
+				ss >> temp;
+				if (temp == "#") writeFile << _cfgLines[i] << std::endl; 
+				else writeFile << temp << " : " << this->_configs.at(temp) << std::endl;
 			}
 		}
 		else return false;
