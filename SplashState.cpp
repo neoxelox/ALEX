@@ -23,7 +23,7 @@ namespace Alex {
 		//<------------------------------>
 
 		//-->*******[INITIALIZE]*******<--
-		_background.setOrigin(_background.getGlobalBounds().width / 2, _background.getGlobalBounds().height / 2);
+		_background.setOrigin(_background.getLocalBounds().width / 2, _background.getLocalBounds().height / 2);
 		_background.setPosition(this->_data->window.getSize().x / 2, this->_data->window.getSize().y / 2);
 		//<------------------------------>
 	}

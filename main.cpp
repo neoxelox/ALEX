@@ -4,6 +4,6 @@
 
 int main()
 {
-	Alex::Game(SCREEN_WIDTH, SCREEN_HEIGHT, "Cúbica");
+	Alex::Game(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_NAME);
 	return EXIT_SUCCESS;
 }

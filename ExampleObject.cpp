@@ -4,7 +4,7 @@ namespace Alex
 {
 	ExampleObject::ExampleObject(GameDataRef data) : _data(data)
 	{
-		_birdSprite.setTexture(this->_data->assets.GetTexture("Splash State Background"));
+		_ExampleObjectSprite.setTexture(this->_data->assets.GetTexture("Splash State Background"));
 	}
 	
 	const sf::Sprite &ExampleObject::GetSprite() const

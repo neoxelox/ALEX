@@ -1,6 +1,7 @@
 #pragma once
 
 //-->***********[WINDOWS]***********<--
+#define GAME_NAME "ALEX : SFML GAME ENGINE"
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define FULLSCREEN true
