@@ -10,7 +10,7 @@
 
 //-->********[SPLASH SCREEN]********<--
 #define SPLASH_STATE_SHOW_TIME 2
-#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/Splash Background.png"
+#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/SplashState/Splash.png"
 //<----------------------------------->
 
 //-->************[MISC]*************<--

@@ -12,9 +12,6 @@ namespace Alex {
 	void SplashState::Init()
 	{
 		//-->>>LOAD BIG MEMORY ASSETS<<<--
-		this->_data->assets.LoadAudio("Hit", HIT_SOUND_FILEPATH);
-		this->_data->assets.LoadAudio("Wing", WING_SOUND_FILEPATH);
-		this->_data->assets.LoadAudio("Point", POINT_SOUND_FILEPATH);
 		//<------------------------------>
 
 		//-->**********[LOAD]**********<--
