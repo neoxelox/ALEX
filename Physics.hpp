@@ -38,4 +38,11 @@ namespace Alex
 	/// Supports scaling and rotation
 	//////
 	bool BoundingBoxTest(const sf::Sprite& Object1, const sf::Sprite& Object2);
+
+	float getAngleRad(sf::Vector2f vector);
+	float getAngleDeg(sf::Vector2f vector);
+	float getSign(float x);
+	float getMod(sf::Vector2f vector);
+	sf::Vector2f cmptVectorDeg(float mod, float angle);
+	sf::Vector2f cmptVectorRad(float mod, float angle);
 }

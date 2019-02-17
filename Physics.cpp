@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include "Physics.hpp"
+#define DEGTORAD 3.14159265/180
+#define RADTODEG 180/3.14159265
 
 //Advaced collision system (ABBA) by some random dude at internet
 namespace Alex
@@ -185,4 +187,69 @@ namespace Alex
 		return true;
 	}
 
+	float getAngleRad(sf::Vector2f vector) 
+	{
+		if (vector.x == 0)
+		{
+			if (vector.y < 0) return 270 * DEGTORAD;
+			else return 90 * DEGTORAD;
+		}
+		else if (vector.y == 0)
+		{
+			if (vector.x > 0) return 0;
+			else return 180 * DEGTORAD;
+		}
+		//Primer Cuadrante
+		else if (vector.x > 0 and vector.y < 0) return (360 - abs((atanf(vector.y / vector.x))));
+		//Segundo Cuadrante
+		else if (vector.x < 0 and vector.y < 0) return (180 + abs((atanf(vector.y / vector.x))));
+		//Tercer Cuadrante
+		else if (vector.x < 0 and vector.y > 0) return (180 - abs((atanf(vector.y / vector.x))));
+		//Cuarto Cuadrante
+		else if (vector.x > 0 and vector.y > 0) return (abs((atanf(vector.y / vector.x))));
+	}
+
+	float getAngleDeg(sf::Vector2f vector)
+	{
+		if (vector.x == 0)
+		{
+			if (vector.y < 0) return 270;
+			else return 90;
+		}
+		else if (vector.y == 0)
+		{
+			if (vector.x > 0) return 0;
+			else return 180;
+		}
+		//Primer Cuadrante
+		else if (vector.x > 0 and vector.y < 0) return 360 - (abs((atanf(vector.y / vector.x)))) * RADTODEG;
+		//Segundo Cuadrante
+		else if (vector.x < 0 and vector.y < 0) return 180 + (abs((atanf(vector.y / vector.x)))) * RADTODEG;
+		//Tercer Cuadrante
+		else if (vector.x < 0 and vector.y > 0) return 180 - (abs((atanf(vector.y / vector.x)))) * RADTODEG;
+		//Cuarto Cuadrante
+		else if (vector.x > 0 and vector.y > 0) return (abs((atanf(vector.y / vector.x)))) * RADTODEG;
+	}
+
+	float getSign(float x)
+	{
+		if (x == 0) return 0;
+		else if (x > 0) return 1;
+		else return -1;
+	}
+
+	float getMod(sf::Vector2f vector)
+	{
+		return sqrt((vector.x*vector.x)+(vector.y*vector.y));
+	}
+
+	sf::Vector2f cmptVectorDeg(float mod, float angle)
+	{
+		return sf::Vector2f(mod*cos(angle*DEGTORAD),mod*sin(angle*DEGTORAD));
+	}
+
+	sf::Vector2f cmptVectorRad(float mod, float angle)
+	{
+		return sf::Vector2f(mod*cos(angle), mod*sin(angle));
+	}
 }

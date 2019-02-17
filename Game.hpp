@@ -8,6 +8,7 @@
 #include "StateMachine.hpp"
 #include "AssetManager.hpp"
 #include "InputManager.hpp"
+#include "Physics.hpp"
 #include "DEFINITIONS.hpp"
 
 namespace Alex
